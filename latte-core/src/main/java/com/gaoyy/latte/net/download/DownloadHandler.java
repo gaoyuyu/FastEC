@@ -19,7 +19,8 @@ import retrofit2.Response;
  * Created by 傅令杰 on 2017/4/2
  */
 
-public final class DownloadHandler {
+public final class DownloadHandler
+{
 
     private final String URL;
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
@@ -38,7 +39,8 @@ public final class DownloadHandler {
                            String name,
                            ISuccess success,
                            IFailure failure,
-                           IError error) {
+                           IError error)
+    {
         this.URL = url;
         this.REQUEST = request;
         this.DOWNLOAD_DIR = downDir;
@@ -49,31 +51,41 @@ public final class DownloadHandler {
         this.ERROR = error;
     }
 
-    public final void handleDownload() {
-        if (REQUEST != null) {
+    public final void handleDownload()
+    {
+        if (REQUEST != null)
+        {
             REQUEST.onRequestStart();
         }
 
         RestCreator
                 .getRestService()
                 .download(URL, PARAMS)
-                .enqueue(new Callback<ResponseBody>() {
+                .enqueue(new Callback<ResponseBody>()
+                {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
+                    {
+                        if (response.isSuccessful())
+                        {
                             final ResponseBody responseBody = response.body();
                             final SaveFileTask task = new SaveFileTask(REQUEST, SUCCESS);
                             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
                                     DOWNLOAD_DIR, EXTENSION, responseBody, NAME);
 
                             //这里一定要注意判断，否则文件下载不全
-                            if (task.isCancelled()) {
-                                if (REQUEST != null) {
+                            if (task.isCancelled())
+                            {
+                                if (REQUEST != null)
+                                {
                                     REQUEST.onRequestEnd();
                                 }
                             }
-                        } else {
-                            if (ERROR != null) {
+                        }
+                        else
+                        {
+                            if (ERROR != null)
+                            {
                                 ERROR.onError(response.code(), response.message());
                             }
                         }
@@ -81,8 +93,10 @@ public final class DownloadHandler {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        if (FAILURE != null) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t)
+                    {
+                        if (FAILURE != null)
+                        {
                             FAILURE.onFailure();
                             RestCreator.getParams().clear();
                         }
