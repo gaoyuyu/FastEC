@@ -3,6 +3,7 @@ package com.gaoyy.fastec.example;
 import android.app.Application;
 
 import com.gaoyy.latte.app.Latte;
+import com.gaoyy.latte.ec.database.DatabaseManager;
 import com.gaoyy.latte.ec.icon.FontEcModule;
 import com.gaoyy.latte.net.interceptors.DebugInterceptor;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -21,8 +22,10 @@ public class ExampleApp extends Application
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
                 .withApiHost("http://127.0.0.1/")
-                .withLoaderDelayed(5000)
-                .withInterceptor(new DebugInterceptor("index",R.raw.test))
+                .withLoaderDelayed(1000)
+                .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .configure();
+
+        DatabaseManager.getInstance().init(this);
     }
 }
