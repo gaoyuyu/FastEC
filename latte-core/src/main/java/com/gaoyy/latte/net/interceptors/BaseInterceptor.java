@@ -1,18 +1,25 @@
 package com.gaoyy.latte.net.interceptors;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
+import okhttp3.Response;
 
 /**
- * Created by 傅令杰 on 2017/4/11
+ * Created by gaoyy on 2017/7/31.
  */
 
-public abstract class BaseInterceptor implements Interceptor
+public class BaseInterceptor implements Interceptor
 {
+    @Override
+    public Response intercept(Chain chain) throws IOException
+    {
+        return null;
+    }
 
     protected LinkedHashMap<String, String> getUrlParameters(Chain chain)
     {
@@ -32,7 +39,7 @@ public abstract class BaseInterceptor implements Interceptor
         return request.url().queryParameter(key);
     }
 
-    protected LinkedHashMap<String, String> getBodyParameters(Chain chain)
+    protected LinkedHashMap<String, String> getBodyparameters(Chain chain)
     {
         final FormBody formBody = (FormBody) chain.request().body();
         final LinkedHashMap<String, String> params = new LinkedHashMap<>();
@@ -41,6 +48,7 @@ public abstract class BaseInterceptor implements Interceptor
         {
             size = formBody.size();
         }
+
         for (int i = 0; i < size; i++)
         {
             params.put(formBody.name(i), formBody.value(i));
@@ -48,8 +56,10 @@ public abstract class BaseInterceptor implements Interceptor
         return params;
     }
 
-    protected String getBodyParameters(Chain chain, String key)
+    protected String getBodyparameters(Chain chain, String key)
     {
-        return getBodyParameters(chain).get(key);
+        return getBodyparameters(chain).get(key);
     }
+
+
 }

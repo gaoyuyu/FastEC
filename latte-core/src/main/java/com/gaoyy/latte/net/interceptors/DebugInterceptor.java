@@ -1,9 +1,8 @@
 package com.gaoyy.latte.net.interceptors;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.RawRes;
 
-import com.gaoyy.latte.util.file.FileUtil;
+import com.gaoyy.latte.util.FileUtil;
 
 import java.io.IOException;
 
@@ -13,7 +12,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Created by 傅令杰 on 2017/4/11
+ * Created by gaoyy on 2017/7/31.
  */
 
 public class DebugInterceptor extends BaseInterceptor
@@ -47,7 +46,7 @@ public class DebugInterceptor extends BaseInterceptor
     }
 
     @Override
-    public Response intercept(@NonNull Chain chain) throws IOException
+    public Response intercept(Chain chain) throws IOException
     {
         final String url = chain.request().url().toString();
         if (url.contains(DEBUG_URL))

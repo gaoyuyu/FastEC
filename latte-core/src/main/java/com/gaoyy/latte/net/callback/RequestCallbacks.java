@@ -2,9 +2,6 @@ package com.gaoyy.latte.net.callback;
 
 import android.os.Handler;
 
-import com.gaoyy.latte.app.ConfigKeys;
-import com.gaoyy.latte.app.Latte;
-import com.gaoyy.latte.net.RestCreator;
 import com.gaoyy.latte.ui.loader.LatteLoader;
 import com.gaoyy.latte.ui.loader.LoaderStyle;
 
@@ -13,81 +10,70 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by 傅令杰 on 2017/4/2
+ * Created by gaoyy on 2017/7/31.
  */
 
-public final class RequestCallbacks implements Callback<String>
-{
+public class RequestCallbacks implements Callback<String>{
 
     private final IRequest REQUEST;
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
     private final LoaderStyle LOADER_STYLE;
-    private static final Handler HANDLER = Latte.getHandler();
+    //目前加一个延迟！！
+    private static final Handler HANDLER=new Handler();
 
-    public RequestCallbacks(IRequest request, ISuccess success, IFailure failure, IError error, LoaderStyle style)
-    {
+    public RequestCallbacks(IRequest request,
+                            ISuccess success,
+                            IFailure failure,
+                            IError error,
+                            LoaderStyle style) {
         this.REQUEST = request;
         this.SUCCESS = success;
         this.FAILURE = failure;
         this.ERROR = error;
-        this.LOADER_STYLE = style;
+        this.LOADER_STYLE=style;
     }
 
+
     @Override
-    public void onResponse(Call<String> call, Response<String> response)
-    {
-        if (response.isSuccessful())
-        {
-            if (call.isExecuted())
-            {
-                if (SUCCESS != null)
-                {
+    public void onResponse(Call<String> call, Response<String> response) {
+        if(response.isSuccessful()){
+            if(call.isExecuted()){
+                if(SUCCESS!=null){
                     SUCCESS.onSuccess(response.body());
                 }
             }
-        }
-        else
-        {
-            if (ERROR != null)
-            {
-                ERROR.onError(response.code(), response.message());
+        }else {
+            if(ERROR!=null){
+                ERROR.onError(response.code(),response.message());
             }
         }
 
-        onRequestFinish();
+        stopLoading();
+
     }
 
     @Override
-    public void onFailure(Call<String> call, Throwable t)
-    {
-        if (FAILURE != null)
-        {
+    public void onFailure(Call<String> call, Throwable t) {
+        if(FAILURE!=null){
             FAILURE.onFailure();
         }
-        if (REQUEST != null)
-        {
+
+        if(REQUEST!=null){
             REQUEST.onRequestEnd();
         }
-
-        onRequestFinish();
+        stopLoading();
     }
 
-    private void onRequestFinish()
-    {
-        final long delayed = Latte.getConfiguration(ConfigKeys.LOADER_DELAYED);
-        if (LOADER_STYLE != null)
-        {
-            HANDLER.postDelayed(new Runnable()
-            {
+    private void stopLoading(){
+        if(LOADER_STYLE!=null){
+            HANDLER.postDelayed(new Runnable() {
                 @Override
-                public void run()
-                {
-                    RestCreator.getParams().clear();
+                public void run() {
                     LatteLoader.stopLoading();
                 }
-            }, delayed);
+            },1000);
         }
     }
 }

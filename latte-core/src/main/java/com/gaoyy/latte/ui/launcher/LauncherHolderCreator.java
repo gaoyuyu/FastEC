@@ -3,13 +3,14 @@ package com.gaoyy.latte.ui.launcher;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 
 /**
- * Created by 傅令杰 on 2017/4/22
+ * Created by gaoyy on 2017/7/31.
  */
 
-public class LauncherHolderCreator implements CBViewHolderCreator<LauncherHolder> {
-
+public class LauncherHolderCreator implements CBViewHolderCreator<LauncherHolder>
+{
     @Override
-    public LauncherHolder createHolder() {
+    public LauncherHolder createHolder()
+    {
         return new LauncherHolder();
     }
 }

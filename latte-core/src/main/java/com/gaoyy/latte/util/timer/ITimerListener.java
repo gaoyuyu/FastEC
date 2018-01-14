@@ -1,9 +1,10 @@
 package com.gaoyy.latte.util.timer;
 
 /**
- * Created by 傅令杰 on 2017/4/22
+ * Created by gaoyy on 2017/7/31.
  */
 
 public interface ITimerListener {
+
     void onTimer();
 }

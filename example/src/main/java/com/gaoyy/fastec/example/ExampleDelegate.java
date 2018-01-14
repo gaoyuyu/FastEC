@@ -5,11 +5,14 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 
-import com.gaoyy.latte.app.Latte;
 import com.gaoyy.latte.delegates.LatteDelegate;
+import com.gaoyy.latte.net.RestClient;
+import com.gaoyy.latte.net.callback.IError;
+import com.gaoyy.latte.net.callback.IFailure;
+import com.gaoyy.latte.net.callback.ISuccess;
 
 /**
- * Created by gaoyy on 2018/1/13 0013.
+ * Created by gaoyy on 2018/1/14.
  */
 
 public class ExampleDelegate extends LatteDelegate
@@ -23,8 +26,41 @@ public class ExampleDelegate extends LatteDelegate
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView)
     {
-        Toast.makeText(Latte.getApplicationContext(),"exasdasdasd",Toast.LENGTH_SHORT).show();
+
+        //testRestClient();
+
     }
 
+    private void testRestClient()
+    {
+        RestClient.builder()
+                .url("http://127.0.0.1/index")
+                .loader(getContext())
+                .success(new ISuccess()
+                {
+                    @Override
+                    public void onSuccess(String response)
+                    {
+                        Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .failure(new IFailure()
+                {
+                    @Override
+                    public void onFailure()
+                    {
 
+                    }
+                })
+                .error(new IError()
+                {
+                    @Override
+                    public void onError(int code, String msg)
+                    {
+
+                    }
+                })
+                .build()
+                .get();
+    }
 }

@@ -10,11 +10,12 @@ import com.gaoyy.latte.delegates.LatteDelegate;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
- * Created by gaoyy on 2018/1/10 0010.
+ * Created by gaoyy on 2018/1/14.
  */
 
 public abstract class ProxyActivity extends SupportActivity
 {
+
     public abstract LatteDelegate setRootDelegate();
 
     @Override
@@ -28,7 +29,6 @@ public abstract class ProxyActivity extends SupportActivity
     {
         final ContentFrameLayout container = new ContentFrameLayout(this);
         container.setId(R.id.delegate_container);
-
         setContentView(container);
         if (savedInstanceState == null)
         {

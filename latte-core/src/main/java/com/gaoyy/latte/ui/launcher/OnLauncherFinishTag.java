@@ -1,10 +1,13 @@
 package com.gaoyy.latte.ui.launcher;
 
 /**
- * Created by 傅令杰 on 2017/4/22
+ * Created by gaoyy on 2017/8/2.
  */
 
-public enum OnLauncherFinishTag {
+public enum OnLauncherFinishTag
+{
+
     SIGNED,
     NOT_SIGNED
+
 }

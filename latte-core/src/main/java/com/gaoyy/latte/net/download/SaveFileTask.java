@@ -1,5 +1,6 @@
 package com.gaoyy.latte.net.download;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -7,7 +8,7 @@ import android.os.AsyncTask;
 import com.gaoyy.latte.app.Latte;
 import com.gaoyy.latte.net.callback.IRequest;
 import com.gaoyy.latte.net.callback.ISuccess;
-import com.gaoyy.latte.util.file.FileUtil;
+import com.gaoyy.latte.util.FileUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -15,16 +16,16 @@ import java.io.InputStream;
 import okhttp3.ResponseBody;
 
 /**
- * Created by 傅令杰 on 2017/4/2
+ * Created by gaoyy on 2017/7/31.
  */
 
-final class SaveFileTask extends AsyncTask<Object, Void, File>
+public class SaveFileTask extends AsyncTask<Object, Void, File>
 {
 
     private final IRequest REQUEST;
     private final ISuccess SUCCESS;
 
-    SaveFileTask(IRequest REQUEST, ISuccess SUCCESS)
+    public SaveFileTask(IRequest REQUEST, ISuccess SUCCESS)
     {
         this.REQUEST = REQUEST;
         this.SUCCESS = SUCCESS;
@@ -54,6 +55,7 @@ final class SaveFileTask extends AsyncTask<Object, Void, File>
         {
             return FileUtil.writeToDisk(is, downloadDir, name);
         }
+
     }
 
     @Override
@@ -68,7 +70,8 @@ final class SaveFileTask extends AsyncTask<Object, Void, File>
         {
             REQUEST.onRequestEnd();
         }
-        autoInstallApk(file);
+
+
     }
 
     private void autoInstallApk(File file)

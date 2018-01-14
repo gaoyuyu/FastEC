@@ -22,17 +22,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 /**
- * Created by gaoyy on 2018/1/13 0013.
+ * Created by gaoyy on 2018/1/14.
  */
 
 public class RestClient
 {
-    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+
     private final String URL;
+    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private final IRequest REQUEST;
+
     private final String DOWNLOAD_DIR;
     private final String EXTENSION;
     private final String NAME;
+
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
@@ -41,20 +44,21 @@ public class RestClient
     private final File FILE;
     private final Context CONTEXT;
 
-    RestClient(String url,
-               Map<String, Object> params,
-               String downloadDir,
-               String extension,
-               String name,
-               IRequest request,
-               ISuccess success,
-               IFailure failure,
-               IError error,
-               RequestBody body,
-               File file,
-               Context context,
-               LoaderStyle loaderStyle)
+    public RestClient(String url,
+                      Map<String, Object> params,
+                      String downloadDir,
+                      String extension,
+                      String name,
+                      IRequest request,
+                      ISuccess success,
+                      IFailure failure,
+                      IError error,
+                      RequestBody body,
+                      File file,
+                      Context context,
+                      LoaderStyle loaderStyle)
     {
+
         this.URL = url;
         PARAMS.putAll(params);
         this.DOWNLOAD_DIR = downloadDir;
@@ -68,6 +72,8 @@ public class RestClient
         this.FILE = file;
         this.CONTEXT = context;
         this.LOADER_STYLE = loaderStyle;
+
+
     }
 
     public static RestClientBuilder builder()
@@ -79,7 +85,6 @@ public class RestClient
     {
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;
-
         if (REQUEST != null)
         {
             REQUEST.onRequestStart();
@@ -100,7 +105,6 @@ public class RestClient
                 break;
             case POST_RAW:
                 call = service.postRaw(URL, BODY);
-                break;
             case PUT:
                 call = service.put(URL, PARAMS);
                 break;
@@ -111,31 +115,25 @@ public class RestClient
                 call = service.delete(URL, PARAMS);
                 break;
             case UPLOAD:
-                final RequestBody requestBody =
-                        RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
-                final MultipartBody.Part body =
-                        MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
-                call = service.upload(URL, body);
+                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
+                final MultipartBody.Part body = MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
+                call = RestCreator.getRestService().upload(URL, body);
                 break;
             default:
                 break;
+
         }
 
         if (call != null)
         {
             call.enqueue(getRequestCallback());
         }
+
     }
 
     private Callback<String> getRequestCallback()
     {
-        return new RequestCallbacks(
-                REQUEST,
-                SUCCESS,
-                FAILURE,
-                ERROR,
-                LOADER_STYLE
-        );
+        return new RequestCallbacks(REQUEST, SUCCESS, FAILURE, ERROR, LOADER_STYLE);
     }
 
     public final void get()
@@ -145,6 +143,7 @@ public class RestClient
 
     public final void post()
     {
+        //request(HttpMethod.POST);
         if (BODY == null)
         {
             request(HttpMethod.POST);
@@ -161,6 +160,7 @@ public class RestClient
 
     public final void put()
     {
+        //request(HttpMethod.PUT);
         if (BODY == null)
         {
             request(HttpMethod.PUT);
@@ -187,8 +187,7 @@ public class RestClient
 
     public final void download()
     {
-        new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME,
-                SUCCESS, FAILURE, ERROR)
-                .handleDownload();
+        new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME, SUCCESS, FAILURE, ERROR).handleDownload();
     }
+
 }

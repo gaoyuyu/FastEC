@@ -13,11 +13,13 @@ import butterknife.Unbinder;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 /**
- * Created by gaoyy on 2018/1/10 0010.
+ * Created by gaoyy on 2018/1/14.
  */
 
 public abstract class BaseDelegate extends SwipeBackFragment
 {
+
+    @SuppressWarnings("SpellCheckingInspection")
     private Unbinder mUnbinder = null;
 
     public abstract Object setLayout();
@@ -45,6 +47,7 @@ public abstract class BaseDelegate extends SwipeBackFragment
         onBindView(savedInstanceState, rootView);
 
         return rootView;
+
     }
 
     public final ProxyActivity getProxyActivity()

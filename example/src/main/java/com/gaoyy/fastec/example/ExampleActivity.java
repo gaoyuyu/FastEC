@@ -13,18 +13,19 @@ import com.gaoyy.latte.ec.sign.SignInDelegate;
 import com.gaoyy.latte.ui.launcher.ILauncherListener;
 import com.gaoyy.latte.ui.launcher.OnLauncherFinishTag;
 
-public class ExampleActivity extends ProxyActivity implements ISignListener, ILauncherListener
+public class ExampleActivity extends ProxyActivity implements
+        ISignListener, ILauncherListener
 {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
         {
             actionBar.hide();
         }
-
     }
 
     @Override
@@ -36,13 +37,14 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
     @Override
     public void onSignInSuccess()
     {
-        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "登录成功", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onSignUpSuccess()
     {
-        Toast.makeText(this, "注册并登录成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "注册成功", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -55,7 +57,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
                 startWithPop(new ExampleDelegate());
                 break;
             case NOT_SIGNED:
-                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户没有登录", Toast.LENGTH_LONG).show();
                 startWithPop(new SignInDelegate());
                 break;
             default:

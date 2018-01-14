@@ -14,25 +14,28 @@ import java.util.WeakHashMap;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+
 /**
- * Created by gaoyy on 2018/1/13 0013.
+ * Created by gaoyy on 2017/7/31.
  */
 
 public class RestClientBuilder
 {
-    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private String mUrl = null;
+    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private IRequest mIRequest = null;
     private ISuccess mISuccess = null;
     private IFailure mIFailure = null;
     private IError mIError = null;
     private RequestBody mBody = null;
-    private Context mContext = null;
-    private LoaderStyle mLoaderStyle = null;
     private File mFile = null;
+
     private String mDownloadDir = null;
     private String mExtension = null;
     private String mName = null;
+
+    private Context mContext = null;
+    private LoaderStyle mLoaderStyle = null;
 
     RestClientBuilder()
     {
@@ -123,6 +126,7 @@ public class RestClientBuilder
         return this;
     }
 
+    //loader默认样式
     public final RestClientBuilder loader(Context context)
     {
         this.mContext = context;
@@ -132,10 +136,7 @@ public class RestClientBuilder
 
     public final RestClient build()
     {
-        return new RestClient(mUrl, PARAMS,
-                mDownloadDir, mExtension, mName,
-                mIRequest, mISuccess, mIFailure,
-                mIError, mBody, mFile, mContext,
-                mLoaderStyle);
+        return new RestClient(mUrl, PARAMS, mDownloadDir, mExtension, mName, mIRequest, mISuccess, mIFailure, mIError, mBody, mFile, mContext, mLoaderStyle);
     }
+
 }

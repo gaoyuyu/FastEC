@@ -3,20 +3,20 @@ package com.gaoyy.latte.util.timer;
 import java.util.TimerTask;
 
 /**
- * Created by 傅令杰 on 2017/4/22
+ * Created by gaoyy on 2017/7/31.
  */
 
 public class BaseTimerTask extends TimerTask {
 
-    private ITimerListener mITimerListener = null;
+    private ITimerListener mITimerListener=null;
 
-    public BaseTimerTask(ITimerListener timerListener) {
-        this.mITimerListener = timerListener;
+    public BaseTimerTask(ITimerListener iTimerListener) {
+        this.mITimerListener = iTimerListener;
     }
 
     @Override
     public void run() {
-        if (mITimerListener != null) {
+        if(mITimerListener!=null){
             mITimerListener.onTimer();
         }
     }
