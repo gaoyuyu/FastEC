@@ -52,11 +52,11 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
         {
             case SIGNED:
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
-                start(new ExampleDelegate());
+                startWithPop(new ExampleDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
-                start(new SignInDelegate());
+                startWithPop(new SignInDelegate());
                 break;
             default:
                 break;
