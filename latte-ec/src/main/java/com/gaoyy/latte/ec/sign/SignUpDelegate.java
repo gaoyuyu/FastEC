@@ -1,5 +1,6 @@
 package com.gaoyy.latte.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -17,9 +18,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ * 注册
  * Created by gaoyy on 2018/1/13 0013.
  */
-
 public class SignUpDelegate extends LatteDelegate
 {
 
@@ -34,6 +35,17 @@ public class SignUpDelegate extends LatteDelegate
     @BindView(R2.id.edit_sign_up_re_password)
     TextInputEditText mRePassword = null;
 
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener)
+        {
+            mISignListener = (ISignListener) activity;
+        }
+    }
 
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp()
@@ -52,7 +64,7 @@ public class SignUpDelegate extends LatteDelegate
                         public void onSuccess(String response)
                         {
                             LatteLogger.json("USER_PROFILE", response);
-//                            SignHandler.onSignUp(response, mISignListener);
+                            SignHandler.onSignUp(response, mISignListener);
                         }
                     })
                     .build()
