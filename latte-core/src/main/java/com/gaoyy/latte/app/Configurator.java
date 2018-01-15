@@ -1,6 +1,8 @@
 package com.gaoyy.latte.app;
 
 
+import android.app.Activity;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -22,7 +24,7 @@ public class Configurator
 
     private Configurator()
     {
-        LATTE_CONFIGS.put(ConfigType.CONFIG_READY, false);
+        LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, false);
 
     }
 
@@ -44,32 +46,32 @@ public class Configurator
     public final void configure()
     {
         initIcons();
-        LATTE_CONFIGS.put(ConfigType.CONFIG_READY, true);
+        LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
     }
 
     public final Configurator withApiHost(String host)
     {
-        LATTE_CONFIGS.put(ConfigType.API_HOST, host);
+        LATTE_CONFIGS.put(ConfigKeys.API_HOST, host);
         return this;
     }
 
     public final Configurator withLoaderDelayed(long delayed)
     {
-        LATTE_CONFIGS.put(ConfigType.LOADER_DELAYED, delayed);
+        LATTE_CONFIGS.put(ConfigKeys.LOADER_DELAYED, delayed);
         return this;
     }
 
     public final Configurator withInterceptor(Interceptor interceptor)
     {
         INTERCEPTORS.add(interceptor);
-        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);
+        LATTE_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
         return this;
     }
 
     public final Configurator withInterceptors(ArrayList<Interceptor> interceptors)
     {
         INTERCEPTORS.addAll(interceptors);
-        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);
+        LATTE_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
         return this;
     }
 
@@ -85,15 +87,35 @@ public class Configurator
         }
     }
 
+    public final Configurator withWeChatAppId(String appId)
+    {
+        LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_ID, appId);
+        return this;
+    }
+
+    public final Configurator withWeChatAppSecret(String appSecret)
+    {
+        LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_SECRET, appSecret);
+        return this;
+    }
+
+    public final Configurator withActivity(Activity activity)
+    {
+        LATTE_CONFIGS.put(ConfigKeys.ACTIVITY, activity);
+        return this;
+    }
+
+
     public final Configurator withIcon(IconFontDescriptor descriptor)
     {
         ICONS.add(descriptor);
         return this;
     }
 
+
     private void checkConfiguration()
     {
-        final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY);
+        final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigKeys.CONFIG_READY);
         if (!isReady)
         {
             throw new RuntimeException("Configuration is not ready,call configure");

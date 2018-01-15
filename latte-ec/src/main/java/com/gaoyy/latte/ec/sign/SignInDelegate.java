@@ -48,7 +48,7 @@ public class SignInDelegate extends LatteDelegate
         if (checkForm())
         {
             RestClient.builder()
-                    .url("http://192.168.1.101/RestServer/data/user_profile.json")
+                    .url("http://192.168.1.100/RestServer/data/user_profile.json")
                     .params("email", mEmail.getText().toString())
                     .params("password", mPassword.getText().toString())
                     .success(new ISuccess()

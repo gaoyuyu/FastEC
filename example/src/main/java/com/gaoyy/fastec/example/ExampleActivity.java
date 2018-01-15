@@ -6,8 +6,10 @@ import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.gaoyy.latte.activities.ProxyActivity;
+import com.gaoyy.latte.app.Latte;
 import com.gaoyy.latte.delegates.LatteDelegate;
 import com.gaoyy.latte.ec.launcher.LauncherDelegate;
+import com.gaoyy.latte.ec.main.EcBottomDelegate;
 import com.gaoyy.latte.ec.sign.ISignListener;
 import com.gaoyy.latte.ec.sign.SignInDelegate;
 import com.gaoyy.latte.ui.launcher.ILauncherListener;
@@ -21,6 +23,8 @@ public class ExampleActivity extends ProxyActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        Latte.getConfigurator().withActivity(this);
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
         {
@@ -54,7 +58,7 @@ public class ExampleActivity extends ProxyActivity implements
         {
             case SIGNED:
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
-                startWithPop(new ExampleDelegate());
+                startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "启动结束，用户没有登录", Toast.LENGTH_LONG).show();
