@@ -24,7 +24,7 @@ public class ExampleApp extends Application
                 .withIcon(new FontEcModule())
                 .withLoaderDelayed(1000)
                 .withApiHost("http://127.0.0.1/")
-                .withInterceptor(new DebugInterceptor("index", R.raw.test))
+                .withInterceptor(new DebugInterceptor("test", R.raw.test))
                 .configure();
 
         // 测试数据库 initStetho();
