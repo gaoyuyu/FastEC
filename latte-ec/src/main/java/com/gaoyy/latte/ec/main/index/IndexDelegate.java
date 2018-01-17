@@ -2,25 +2,20 @@ package com.gaoyy.latte.ec.main.index;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
-import com.gaoyy.latte.app.Latte;
 import com.gaoyy.latte.bottom.BottomItemDelegate;
 import com.gaoyy.latte.ec.R;
 import com.gaoyy.latte.ec.R2;
-import com.gaoyy.latte.net.RestClient;
-import com.gaoyy.latte.net.callback.ISuccess;
-import com.gaoyy.latte.ui.recycler.MultipleFields;
-import com.gaoyy.latte.ui.recycler.MultipleItemEntity;
+import com.gaoyy.latte.ui.recycler.BaseDecoration;
 import com.gaoyy.latte.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -55,6 +50,16 @@ public class IndexDelegate extends BottomItemDelegate
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
     }
 
+    private void initRecyclerView()
+    {
+        final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.addItemDecoration
+                (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
+//        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+//        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
+    }
+
     @Override
     public Object setLayout()
     {
@@ -64,28 +69,7 @@ public class IndexDelegate extends BottomItemDelegate
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView)
     {
-        mRefreshHandler = new RefreshHandler(mRefreshLayout);
-        mRefreshHandler.firstPage();
-
-        RestClient.builder()
-                .url("http://192.168.1.101/RestServer/api/index.php")
-                .success(new ISuccess()
-                {
-                    @Override
-                    public void onSuccess(String response)
-                    {
-                        IndexDataConverter converter = new IndexDataConverter();
-                        converter.setJsonData(response);
-
-                        ArrayList<MultipleItemEntity> data = converter.convert();
-                        String a = (String) data.get(1).getField(MultipleFields.IMAGE_URL);
-                        Toast.makeText(Latte.getApplicationContext(),a,Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .build()
-                .get();
-
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
     }
 
     @Override
@@ -93,6 +77,8 @@ public class IndexDelegate extends BottomItemDelegate
     {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        initRecyclerView();
+        mRefreshHandler.firstPage("http://192.168.1.101/RestServer/api/index.php");
 
     }
 }

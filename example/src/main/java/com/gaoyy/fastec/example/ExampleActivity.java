@@ -15,6 +15,8 @@ import com.gaoyy.latte.ec.sign.SignInDelegate;
 import com.gaoyy.latte.ui.launcher.ILauncherListener;
 import com.gaoyy.latte.ui.launcher.OnLauncherFinishTag;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class ExampleActivity extends ProxyActivity implements
         ISignListener, ILauncherListener
 {
@@ -23,13 +25,13 @@ public class ExampleActivity extends ProxyActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        Latte.getConfigurator().withActivity(this);
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
         {
             actionBar.hide();
         }
+        Latte.getConfigurator().withActivity(this);
+        StatusBarCompat.translucentStatusBar(this,true);
     }
 
     @Override
