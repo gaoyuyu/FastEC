@@ -13,6 +13,7 @@ import android.view.View;
 import com.gaoyy.latte.bottom.BottomItemDelegate;
 import com.gaoyy.latte.ec.R;
 import com.gaoyy.latte.ec.R2;
+import com.gaoyy.latte.ec.main.EcBottomDelegate;
 import com.gaoyy.latte.ui.recycler.BaseDecoration;
 import com.gaoyy.latte.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -56,8 +57,8 @@ public class IndexDelegate extends BottomItemDelegate
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
-//        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
-//        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
     }
 
     @Override
