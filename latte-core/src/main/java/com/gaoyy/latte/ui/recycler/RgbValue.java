@@ -14,7 +14,8 @@ public abstract class RgbValue
 
     public abstract int blue();
 
-    public static RgbValue create(int red, int green, int blue) {
+    public static RgbValue create(int red, int green, int blue)
+    {
         return new AutoValue_RgbValue(red, green, blue);
     }
 }

@@ -4,7 +4,8 @@ package com.gaoyy.latte.net;
  * Created by gaoyy on 2018/1/14.
  */
 
-public enum HttpMethod {
+public enum HttpMethod
+{
 
     GET,
     POST,

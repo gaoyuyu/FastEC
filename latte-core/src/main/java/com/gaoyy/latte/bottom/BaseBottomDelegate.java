@@ -32,7 +32,7 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
     private ArrayList<BottomItemDelegate> ITEM_DELEGATES = new ArrayList<>();
     //使用LinkedHashMap保证有序，HashMap为无序
     private LinkedHashMap<BottomTabBean, BottomItemDelegate> ITEMS = new LinkedHashMap<>();
-    //当前的ftem
+    //当前的item
     private int mCurrentDelegate = 0;
     //首次进入的第一个item
     private int mIndexDelegate = 0;

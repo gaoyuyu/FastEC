@@ -12,7 +12,8 @@ import com.gaoyy.latte.app.Latte;
  * Created by 傅令杰 on 2017/4/22
  */
 
-public final class LattePreference {
+public final class LattePreference
+{
 
     /**
      * 提示:
@@ -24,60 +25,70 @@ public final class LattePreference {
             PreferenceManager.getDefaultSharedPreferences(Latte.getApplicationContext());
     private static final String APP_PREFERENCES_KEY = "profile";
 
-    private static SharedPreferences getAppPreference() {
+    private static SharedPreferences getAppPreference()
+    {
         return PREFERENCES;
     }
 
-    public static void setAppProfile(String val) {
+    public static void setAppProfile(String val)
+    {
         getAppPreference()
                 .edit()
                 .putString(APP_PREFERENCES_KEY, val)
                 .apply();
     }
 
-    public static String getAppProfile() {
+    public static String getAppProfile()
+    {
         return getAppPreference().getString(APP_PREFERENCES_KEY, null);
     }
 
-    public static JSONObject getAppProfileJson() {
+    public static JSONObject getAppProfileJson()
+    {
         final String profile = getAppProfile();
         return JSON.parseObject(profile);
     }
 
-    public static void removeAppProfile() {
+    public static void removeAppProfile()
+    {
         getAppPreference()
                 .edit()
                 .remove(APP_PREFERENCES_KEY)
                 .apply();
     }
 
-    public static void clearAppPreferences() {
+    public static void clearAppPreferences()
+    {
         getAppPreference()
                 .edit()
                 .clear()
                 .apply();
     }
 
-    public static void setAppFlag(String key, boolean flag) {
+    public static void setAppFlag(String key, boolean flag)
+    {
         getAppPreference()
                 .edit()
                 .putBoolean(key, flag)
                 .apply();
     }
 
-    public static boolean getAppFlag(String key) {
+    public static boolean getAppFlag(String key)
+    {
         return getAppPreference()
                 .getBoolean(key, false);
     }
 
-    public static void addCustomAppProfile(String key, String val) {
+    public static void addCustomAppProfile(String key, String val)
+    {
         getAppPreference()
                 .edit()
                 .putString(key, val)
                 .apply();
     }
 
-    public static String getCustomAppProfile(String key) {
+    public static String getCustomAppProfile(String key)
+    {
         return getAppPreference().getString(key, "");
     }
 

@@ -6,17 +6,21 @@ import java.util.TimerTask;
  * Created by gaoyy on 2017/7/31.
  */
 
-public class BaseTimerTask extends TimerTask {
+public class BaseTimerTask extends TimerTask
+{
 
-    private ITimerListener mITimerListener=null;
+    private ITimerListener mITimerListener = null;
 
-    public BaseTimerTask(ITimerListener iTimerListener) {
+    public BaseTimerTask(ITimerListener iTimerListener)
+    {
         this.mITimerListener = iTimerListener;
     }
 
     @Override
-    public void run() {
-        if(mITimerListener!=null){
+    public void run()
+    {
+        if (mITimerListener != null)
+        {
             mITimerListener.onTimer();
         }
     }

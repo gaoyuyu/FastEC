@@ -15,19 +15,22 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
  * Created by 傅令杰 on 2017/4/25
  */
 
-public abstract class BaseWXEntryActivity extends BaseWXActivity {
+public abstract class BaseWXEntryActivity extends BaseWXActivity
+{
 
     //用户登录成功后回调
     protected abstract void onSignInSuccess(String userInfo);
 
     //微信发送请求到第三方应用后的回调
     @Override
-    public void onReq(BaseReq baseReq) {
+    public void onReq(BaseReq baseReq)
+    {
     }
 
     //第三方应用发送请求到微信后的回调
     @Override
-    public void onResp(BaseResp baseResp) {
+    public void onResp(BaseResp baseResp)
+    {
 
         final String code = ((SendAuth.Resp) baseResp).code;
         final StringBuilder authUrl = new StringBuilder();
@@ -44,13 +47,16 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity {
         getAuth(authUrl.toString());
     }
 
-    private void getAuth(String authUrl) {
+    private void getAuth(String authUrl)
+    {
         RestClient
                 .builder()
                 .url(authUrl)
-                .success(new ISuccess() {
+                .success(new ISuccess()
+                {
                     @Override
-                    public void onSuccess(String response) {
+                    public void onSuccess(String response)
+                    {
 
                         final JSONObject authObj = JSON.parseObject(response);
                         final String accessToken = authObj.getString("access_token");
@@ -74,25 +80,32 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity {
                 .get();
     }
 
-    private void getUserInfo(String userInfoUrl) {
+    private void getUserInfo(String userInfoUrl)
+    {
         RestClient
                 .builder()
                 .url(userInfoUrl)
-                .success(new ISuccess() {
+                .success(new ISuccess()
+                {
                     @Override
-                    public void onSuccess(String response) {
+                    public void onSuccess(String response)
+                    {
                         onSignInSuccess(response);
                     }
                 })
-                .failure(new IFailure() {
+                .failure(new IFailure()
+                {
                     @Override
-                    public void onFailure() {
+                    public void onFailure()
+                    {
 
                     }
                 })
-                .error(new IError() {
+                .error(new IError()
+                {
                     @Override
-                    public void onError(int code, String msg) {
+                    public void onError(int code, String msg)
+                    {
 
                     }
                 })

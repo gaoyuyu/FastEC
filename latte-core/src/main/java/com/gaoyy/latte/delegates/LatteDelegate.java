@@ -7,6 +7,12 @@ package com.gaoyy.latte.delegates;
 public abstract class LatteDelegate extends PermissionCheckerDelegate
 {
 
+    /**
+     * 获取父级Fraggment
+     *
+     * @param <T>
+     * @return
+     */
     public <T extends LatteDelegate> T getParentDelegate()
     {
         return (T) getParentFragment();

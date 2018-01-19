@@ -10,7 +10,7 @@ import com.gaoyy.latte.delegates.LatteDelegate;
 
 /**
  * bottombar下每一个tab对应的每一个item的父类
- * 
+ * <p>
  * Created by gaoyy on 2018/1/15 0015.
  */
 public abstract class BottomItemDelegate extends LatteDelegate implements View.OnKeyListener

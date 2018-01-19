@@ -13,7 +13,8 @@ import com.bumptech.glide.request.RequestOptions;
  * Created by 傅令杰
  */
 
-public class ImageHolder implements Holder<String> {
+public class ImageHolder implements Holder<String>
+{
 
     private AppCompatImageView mImageView = null;
     private static final RequestOptions BANNER_OPTIONS = new RequestOptions()
@@ -22,13 +23,15 @@ public class ImageHolder implements Holder<String> {
             .centerCrop();
 
     @Override
-    public View createView(Context context) {
-         mImageView = new AppCompatImageView(context);
+    public View createView(Context context)
+    {
+        mImageView = new AppCompatImageView(context);
         return mImageView;
     }
 
     @Override
-    public void UpdateUI(Context context, int position, String data) {
+    public void UpdateUI(Context context, int position, String data)
+    {
         Glide.with(context)
                 .load(data)
                 .apply(BANNER_OPTIONS)

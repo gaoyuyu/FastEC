@@ -4,7 +4,8 @@ package com.gaoyy.latte.util.callback;
  * Created by 傅令杰
  */
 
-public enum CallbackType {
+public enum CallbackType
+{
     ON_CROP,
     TAG_OPEN_PUSH,
     TAG_STOP_PUSH,

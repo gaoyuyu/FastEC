@@ -5,7 +5,8 @@ package com.gaoyy.latte.ui.loader;
  */
 
 @SuppressWarnings("unused")
-public enum LoaderStyle {
+public enum LoaderStyle
+{
     BallPulseIndicator,
     BallGridPulseIndicator,
     BallClipRotateIndicator,

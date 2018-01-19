@@ -25,6 +25,11 @@ public abstract class ProxyActivity extends SupportActivity
         initContainer(savedInstanceState);
     }
 
+    /**
+     * 设置根布局
+     *
+     * @param savedInstanceState
+     */
     private void initContainer(@Nullable Bundle savedInstanceState)
     {
         final ContentFrameLayout container = new ContentFrameLayout(this);
