@@ -33,7 +33,7 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate();
 
-    private MultipleRecyclerAdapter(@Nullable List<MultipleItemEntity> data)
+    public MultipleRecyclerAdapter(@Nullable List<MultipleItemEntity> data)
     {
         super(data);
         init();
