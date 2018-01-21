@@ -54,7 +54,7 @@ public class VerticalListDelegate extends LatteDelegate
     {
         super.onLazyInitView(savedInstanceState);
         RestClient.builder()
-                .url("http://192.168.1.100/RestServer/api/sort_list.php")
+                .url("http://192.168.1.101/RestServer/api/sort_list.php")
                 .loader(getContext(), LoaderStyle.BallGridPulseIndicator)
                 .success(new ISuccess()
                 {
