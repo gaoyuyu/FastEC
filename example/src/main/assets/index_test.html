@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Test</title>
+</head>
+<body>
+Local Test
+
+<button id="test">测试事件</button>
+<a href="second.html">跳转</a>
+
+<script type="text/javascript">
+
+    function nativeCall()
+    {
+        alert("原生调用了！");
+    }
+
+    document.getElementById("test").onclick = function()
+    {
+        var command  = {
+            'action':'test'
+        };
+        latte.event(JSON.stringify(command));
+
+    };
+
+
+
+
+</script>
+
+</body>
+</html>

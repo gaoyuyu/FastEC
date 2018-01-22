@@ -18,6 +18,8 @@ import com.gaoyy.latte.delegates.web.route.Router;
 
 public class WebDelegateImpl extends WebDelegate
 {
+    private IPageLoadListener mIPageLoadListener = null;
+
     public static WebDelegateImpl create(String url)
     {
         final Bundle args = new Bundle();
@@ -25,6 +27,11 @@ public class WebDelegateImpl extends WebDelegate
         final WebDelegateImpl delegate = new WebDelegateImpl();
         delegate.setArguments(args);
         return delegate;
+    }
+
+    public void setPageLoadListener(IPageLoadListener listener)
+    {
+        this.mIPageLoadListener = listener;
     }
 
 
@@ -61,7 +68,7 @@ public class WebDelegateImpl extends WebDelegate
     public WebViewClient initWebViewClient()
     {
         final WebViewClientImpl client = new WebViewClientImpl(this);
-//        client.setPageLoadListener(mIPageLoadListener);
+        client.setPageLoadListener(mIPageLoadListener);
         return client;
     }
 

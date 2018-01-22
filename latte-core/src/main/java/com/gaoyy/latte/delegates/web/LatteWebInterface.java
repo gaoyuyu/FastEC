@@ -11,9 +11,8 @@ import com.gaoyy.latte.util.log.LatteLogger;
  * Created by gaoyy on 2018/1/21 0021.
  */
 
-public class LatteWebInterface
+final class LatteWebInterface
 {
-
     private final WebDelegate DELEGATE;
 
     private LatteWebInterface(WebDelegate delegate)
