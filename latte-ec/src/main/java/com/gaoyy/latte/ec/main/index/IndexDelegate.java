@@ -79,7 +79,7 @@ public class IndexDelegate extends BottomItemDelegate
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler.firstPage("http://192.168.1.100/RestServer/api/index.php");
+        mRefreshHandler.firstPage("http://192.168.1.101/RestServer/api/index.php");
 
     }
 }
