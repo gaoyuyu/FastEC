@@ -2,7 +2,7 @@ package com.gaoyy.latte.net.interceptors;
 
 import android.support.annotation.RawRes;
 
-import com.gaoyy.latte.util.FileUtil;
+import com.gaoyy.latte.util.file.FileUtil;
 
 import java.io.IOException;
 

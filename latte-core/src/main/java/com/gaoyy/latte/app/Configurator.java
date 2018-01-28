@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.Utils;
 import com.gaoyy.latte.delegates.web.event.Event;
 import com.gaoyy.latte.delegates.web.event.EventManager;
 import com.joanzapata.iconify.IconFontDescriptor;
@@ -57,8 +58,12 @@ public class Configurator
     {
         //初始化字体图标
         initIcons();
+
         //设置CONFIG_READY为true
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
+
+        //初始化UtilCode,放在CONFIG_READY之后获取context
+        Utils.init(Latte.getApplicationContext());
     }
 
     /**

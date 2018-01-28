@@ -56,7 +56,7 @@ public class OrderListDelegate extends LatteDelegate
         super.onLazyInitView(savedInstanceState);
         RestClient.builder()
                 .loader(getContext())
-                .url("http://192.168.1.101/RestServer/api/order_list.php")
+                .url("http://192.168.1.100/RestServer/api/order_list.php")
                 .params("type", mType)
                 .success(new ISuccess()
                 {
