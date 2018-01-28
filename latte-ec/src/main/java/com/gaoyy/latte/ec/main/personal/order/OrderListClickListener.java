@@ -22,7 +22,7 @@ public class OrderListClickListener extends SimpleClickListener
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position)
     {
-//        DELEGATE.start(new OrderCommentDelegate());
+        DELEGATE.start(new OrderCommentDelegate());
     }
 
     @Override
