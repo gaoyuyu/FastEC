@@ -1,16 +1,23 @@
 package com.gaoyy.latte.ec.main.personal.profile;
 
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.gaoyy.latte.delegates.LatteDelegate;
 import com.gaoyy.latte.ec.R;
 import com.gaoyy.latte.ec.main.personal.list.ListBean;
 import com.gaoyy.latte.ui.date.DateDialogUtil;
+import com.gaoyy.latte.util.callback.CallbackManager;
+import com.gaoyy.latte.util.callback.CallbackType;
+import com.gaoyy.latte.util.callback.IGlobalCallback;
+import com.gaoyy.latte.util.log.LatteLogger;
 
 /**
  * Created by gaoyy on 2018/1/24 0024.
@@ -36,48 +43,20 @@ public class UserProfileClickListener extends SimpleClickListener
         switch (id)
         {
             case 1:
-//                //开始照相机或选择图片
-//                CallbackManager.getInstance()
-//                        .addCallback(CallbackType.ON_CROP, new IGlobalCallback<Uri>() {
-//                            @Override
-//                            public void executeCallback(Uri args) {
-//                                LatteLogger.d("ON_CROP", args);
-//                                final ImageView avatar = (ImageView) view.findViewById(R.id.img_arrow_avatar);
-//                                Glide.with(DELEGATE)
-//                                        .load(args)
-//                                        .into(avatar);
-//
-//                                RestClient.builder()
-//                                        .url(UploadConfig.UPLOAD_IMG)
-//                                        .loader(DELEGATE.getContext())
-//                                        .file(args.getPath())
-//                                        .success(new ISuccess() {
-//                                            @Override
-//                                            public void onSuccess(String response) {
-//                                                LatteLogger.d("ON_CROP_UPLOAD", response);
-//                                                final String path = JSON.parseObject(response).getJSONObject("result")
-//                                                        .getString("path");
-//
-//                                                //通知服务器更新信息
-//                                                RestClient.builder()
-//                                                        .url("user_profile.php")
-//                                                        .params("avatar", path)
-//                                                        .loader(DELEGATE.getContext())
-//                                                        .success(new ISuccess() {
-//                                                            @Override
-//                                                            public void onSuccess(String response) {
-//                                                                //获取更新后的用户信息，然后更新本地数据库
-//                                                                //没有本地数据的APP，每次打开APP都请求API，获取信息
-//                                                            }
-//                                                        })
-//                                                        .build()
-//                                                        .post();
-//                                            }
-//                                        })
-//                                        .build()
-//                                        .upload();
-//                            }
-//                        });
+                //开始照相机或选择图片
+                CallbackManager.getInstance()
+                        .addCallback(CallbackType.ON_CROP, new IGlobalCallback<Uri>()
+                        {
+                            @Override
+                            public void executeCallback(Uri args)
+                            {
+                                LatteLogger.d("ON_CROP", args);
+                                final ImageView avatar = (ImageView) view.findViewById(R.id.img_arrow_avatar);
+                                Glide.with(DELEGATE)
+                                        .load(args)
+                                        .into(avatar);
+                            }
+                        });
                 DELEGATE.startCameraWithCheck();
                 break;
             case 2:

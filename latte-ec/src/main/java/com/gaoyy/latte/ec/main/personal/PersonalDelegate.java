@@ -10,11 +10,13 @@ import android.view.View;
 import com.gaoyy.latte.bottom.BottomItemDelegate;
 import com.gaoyy.latte.ec.R;
 import com.gaoyy.latte.ec.R2;
+import com.gaoyy.latte.ec.main.personal.address.AddressDelegate;
 import com.gaoyy.latte.ec.main.personal.list.ListAdapter;
 import com.gaoyy.latte.ec.main.personal.list.ListBean;
 import com.gaoyy.latte.ec.main.personal.list.ListItemType;
 import com.gaoyy.latte.ec.main.personal.order.OrderListDelegate;
 import com.gaoyy.latte.ec.main.personal.profile.UserProfileDelegate;
+import com.gaoyy.latte.ec.main.personal.settings.SettingsDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,14 +77,14 @@ public class PersonalDelegate extends BottomItemDelegate
         final ListBean address = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(1)
-//                .setDelegate(new AddressDelegate())
+                .setDelegate(new AddressDelegate())
                 .setText("收货地址")
                 .build();
 
         final ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
-//                .setDelegate(new SettingsDelegate())
+                .setDelegate(new SettingsDelegate())
                 .setText("系统设置")
                 .build();
 
