@@ -48,7 +48,7 @@ public class AddressAdapter extends MultipleRecyclerAdapter
                     public void onClick(View v)
                     {
                         RestClient.builder()
-                                .url("http://192.168.1.100/RestServer/api/address.php")
+                                .url("http://192.168.1.101/RestServer/api/address.php")
                                 .params("id", id)
                                 .success(new ISuccess()
                                 {

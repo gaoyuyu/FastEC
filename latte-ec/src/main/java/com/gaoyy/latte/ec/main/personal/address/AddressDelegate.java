@@ -39,7 +39,7 @@ public class AddressDelegate extends LatteDelegate implements ISuccess
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView)
     {
         RestClient.builder()
-                .url("http://192.168.1.100/RestServer/api/address.php")
+                .url("http://192.168.1.101/RestServer/api/address.php")
                 .loader(getContext())
                 .success(this)
                 .build()

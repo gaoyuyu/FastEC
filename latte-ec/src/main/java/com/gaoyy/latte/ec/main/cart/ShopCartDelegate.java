@@ -152,7 +152,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
     {
         super.onLazyInitView(savedInstanceState);
         RestClient.builder()
-                .url("http://192.168.1.100/RestServer/api/shop_cart.php")
+                .url("http://192.168.1.101/RestServer/api/shop_cart.php")
                 .loader(getContext(), LoaderStyle.LineSpinFadeLoaderIndicator)
                 .success(this)
                 .build()
