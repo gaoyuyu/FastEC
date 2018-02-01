@@ -1,11 +1,14 @@
 package com.gaoyy.latte.ec.detail;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -99,6 +102,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
         mCollapsingToolbarLayout.setContentScrimColor(Color.WHITE);
         mAppBar.addOnOffsetChangedListener(this);
         initData();
+        initTabLayout();
     }
 
     private void initData()
@@ -115,6 +119,8 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
                         final JSONObject data =
                                 JSON.parseObject(response).getJSONObject("data");
                         initBanner(data);
+                        initGoodsInfo(data);
+                        initPager(data);
                     }
                 })
                 .build()
@@ -137,6 +143,28 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
                 .setPageTransformer(new DefaultTransformer())
                 .startTurning(3000)
                 .setCanLoop(true);
+    }
+
+    private void initGoodsInfo(JSONObject data)
+    {
+        final String goodsInfo = data.toJSONString();
+        loadRootFragment(R.id.frame_goods_info, GoodsInfoDelegate.create(goodsInfo));
+    }
+
+    private void initTabLayout()
+    {
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mTabLayout.setSelectedTabIndicatorColor
+                (ContextCompat.getColor(getContext(), R.color.app_main));
+        mTabLayout.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
+        mTabLayout.setBackgroundColor(Color.WHITE);
+        mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void initPager(JSONObject data)
+    {
+        final PagerAdapter adapter = new TabPagerAdapter(getFragmentManager(), data);
+        mViewPager.setAdapter(adapter);
     }
 
     @Override
